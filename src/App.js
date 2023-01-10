@@ -1,17 +1,20 @@
-import logo from './logo.svg';
 import './App.css';
-import Navbarr from './components/navbar/navbar';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Dashboard from './page/dashboard/dashboard';
+import Detail from './page/detail/detail';
 
 function App() {
   return (
     <>
-      <Navbarr />
-      <div className="App-body">
-        <div className="header ">
-          <h1 className="">Explore</h1>
-          <div className="text-sm text-gray-500">What are you gonna watch today?</div>
-        </div>
-      </div>
+      <Router>
+        {/* <div className="App"> */}
+        <Routes>
+          <Route path="/" element={<Dashboard />} />
+          <Route path="/about" element={<Detail />} />
+          {/* <Route path="*" element={<Pagenotfound />} /> */}
+        </Routes>
+        {/* </div> */}
+      </Router>
     </>
   );
 }

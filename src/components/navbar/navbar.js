@@ -3,8 +3,8 @@ import { Disclosure, Menu, Transition } from '@headlessui/react';
 import { Bars3Icon, BellIcon, XMarkIcon } from '@heroicons/react/24/outline';
 
 const navigation = [
-  { name: 'Home', href: '#', current: true },
-  { name: 'Trending', href: '#', current: false },
+  { name: 'Home', href: '/', current: true },
+  { name: 'Detail', href: '/detail', current: false },
   { name: 'Series', href: '#', current: false },
   //   { name: 'Calendar', href: '#', current: false },
 ];
