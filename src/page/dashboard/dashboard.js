@@ -1,12 +1,12 @@
 import '../../App.css';
 import thumbnail1 from '../../img/thumbnail1.jpg';
-import Navbarr from '../../components/navbar/navbar';
+// import Navbarr from '../../components/navbar/navbar';
 import Card from '../../components/cards/card';
 
 function Dashboard() {
   return (
     <>
-      <Navbarr />
+      {/* <Navbarr /> */}
       <div className="App-body">
         <div className="header ">
           <h1 className="">Explore</h1>
