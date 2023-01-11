@@ -1,6 +1,7 @@
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import Search from '../search/search';
 
 function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to);
@@ -42,17 +43,7 @@ export default function Navbarr() {
               </div>
               <div className="ml-auto mr-8 sm:block hidden">
                 <div class="flex justify-center">
-                  <div class=" xl:w-96">
-                    <div class="input-group relative flex flex-wrap items-stretch w-full ">
-                      <input
-                        type="search"
-                        class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-200 bg-gray-500 bg-clip-padding border border-solid border-gray-500 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                        placeholder="Search"
-                        aria-label="Search"
-                        aria-describedby="button-addon2"
-                      />
-                    </div>
-                  </div>
+                  <Search />
                 </div>
               </div>
             </div>
