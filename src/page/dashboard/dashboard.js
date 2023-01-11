@@ -1,23 +1,13 @@
-import '../../App.css';
-import thumbnail1 from '../../img/thumbnail1.jpg';
-import Card from '../../components/cards/card';
 import axios from 'axios';
 import { useEffect, useState } from 'react';
-import Search from '../../components/search/search';
+import '../../App.css';
+import Card from '../../components/cards/card';
+import thumbnail1 from '../../img/thumbnail1.jpg';
 
 function Dashboard() {
-  const [loading, setLoading] = useState(true);
   const [movies, setMovies] = useState([]);
-  const [errorMessage, setErrorMessage] = useState(null);
 
-  const [searchValue, setSearchValue] = useState(' ');
-
-  // const handleSearchInputChanges = (e) => {
-  //   setSearchValue(e.target.value);
-  //   console.log(searchValue);
-  // };
-
-  // const [search, setSearch] = useState('');
+  const [searchValue, setSearchValue] = useState('');
 
   const getMovieRequest = async () => {
     await axios
@@ -32,17 +22,17 @@ function Dashboard() {
       });
   };
 
-  useEffect(() => {
-    getMovieRequest();
-  }, []);
-
   const fetchSearch = async () => {
     const { data } = await axios.get(`https://api.themoviedb.org/3/search/multi?api_key=8861682de098ff4d4464beac670c09cd&query=${searchValue}`);
     setMovies(data.results);
   };
 
   useEffect(() => {
-    fetchSearch();
+    if (searchValue === '') {
+      getMovieRequest();
+    } else {
+      fetchSearch();
+    }
   }, [searchValue]);
 
   return (
@@ -56,22 +46,24 @@ function Dashboard() {
           </div>
         </div>
         <div className="body">
-          <h1 className="my-5">New Release</h1>
-          {/* search */}
-          <div class=" xl:w-96 my-5">
-            <div class="input-group relative flex flex-wrap items-stretch w-full ">
-              <input
-                value={searchValue}
-                onChange={(event) => setSearchValue(event.target.value)}
-                type="text"
-                class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-200 bg-gray-500 bg-clip-padding border border-solid border-gray-500 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
-                placeholder="Search"
-                aria-label="Search"
-                aria-describedby="button-addon2"
-              />
+          <div className="flex mb-6">
+            <h1 className="">New Release</h1>
+            {/* search */}
+            <div class=" xl:w-96  ml-auto">
+              <div class="input-group relative flex flex-wrap items-stretch w-full ">
+                <input
+                  value={searchValue}
+                  onChange={(event) => setSearchValue(event.target.value)}
+                  type="text"
+                  class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-200 bg-gray-500 bg-clip-padding border border-solid border-gray-500 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                  placeholder="Search"
+                  aria-label="Search"
+                  aria-describedby="button-addon2"
+                />
+              </div>
             </div>
+            {/* search */}
           </div>
-          {/* search */}
 
           <div class="grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 gap-4">
             {movies.map((item) => {

@@ -41,11 +41,11 @@ export default function Navbarr() {
                   </div>
                 </div>
               </div>
-              <div className="ml-auto mr-8 sm:block hidden">
+              {/* <div className="ml-auto mr-8 sm:block hidden">
                 <div class="flex justify-center">
                   <Search />
                 </div>
-              </div>
+              </div> */}
             </div>
           </div>
 

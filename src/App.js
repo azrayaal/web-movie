@@ -11,7 +11,7 @@ function App() {
         <Navbarr />
         <Routes>
           <Route path="/" element={<Dashboard />} />
-          <Route path="/detail" element={<Detail />} />
+          <Route path="detail/:id" element={<Detail />} />
           {/* <Route path="*" element={<Pagenotfound />} /> */}
         </Routes>
       </Router>
