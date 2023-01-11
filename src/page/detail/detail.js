@@ -7,6 +7,7 @@ import thumbnail1 from '../../img/thumbnail1.jpg';
 export default function Detail() {
   const { id } = useParams();
   const [movies, setMovies] = useState({});
+  const [moviesampingan, setMoviesampingan] = useState({});
   const [genre, setGenres] = useState([]);
   const [productCompanies, setProductCompanies] = useState([]);
 
@@ -32,8 +33,8 @@ export default function Detail() {
   return (
     <>
       <div className="App-body">
-        <div class="grid grid-cols-4 gap-4">
-          <div class="col-span-3 ...">
+        <div class="grid grid-cols-1 gap-4">
+          <div class="">
             <div className="header ">
               <h1 className="">{movies.title}</h1>
               <div className="text-sm text-gray-500">What are you gonna watch today?</div>
@@ -44,68 +45,79 @@ export default function Detail() {
               </div>
             </div>
             <div className="body my-5"></div>
-            <div class="grid sm:grid-cols-3 grid-cols-1 gap-4">
-              <div class="detail-card">
-                <div className="flex justify-center ">
-                  <div className="rounded-xl  shadow-lg max-w-sm relative">
+            <div class="grid sm:grid-cols-4 grid-cols-1 gap-4">
+              <div class="detail-card ">
+                <div className=" flex justify-center">
+                  <div className="rounded-xl shadow-lg max-w-sm relative">
                     <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">
                       <img className="rounded-xl saturate-50 h-[25rem]" src={`${IMG}/w500${movies.poster_path}`} alt={movies.title} />
                     </a>
                   </div>
                 </div>
               </div>
-              <div class="detail">
+              <div class="detail col-span-2">
                 <div>
-                  <h5>Release Date:</h5>
-                  <span className="text-sm text-gray-400">{movies.release_date}</span>
+                  <div className="text-3xl font-bold text-gray-200">{movies.original_title}</div>
                 </div>
                 <div>
-                  <h5>Language:</h5>
-                  <span className="text-sm text-gray-400">{movies.original_language}</span>
+                  <div className="text-base text-gray-200 my-3">
+                    Release Date:
+                    <br />
+                    <span className="text-base text-gray-400"> {movies.release_date}</span>
+                  </div>
                 </div>
                 <div>
-                  <h5>Studio:</h5>
-                  {productCompanies.map((item) => {
-                    return (
-                      <span className="text-sm text-gray-400" key={id}>
-                        {item.name}
-                      </span>
-                    );
-                  })}
+                  <div className="text-base text-gray-200 mb-3">
+                    Language:
+                    <br />
+                    <span className="text-base text-gray-400"> {movies.original_language}</span>
+                  </div>
                 </div>
                 <div>
-                  <h5>Duration:</h5>
-                  <span className="text-sm text-gray-400">{movies.runtime} hr</span>
+                  <div className="text-base text-gray-200 mb-3">
+                    Studio:
+                    <br />
+                    {productCompanies.map((item) => {
+                      return (
+                        <span className="text-base text-gray-400" key={id}>
+                          {item.name}
+                          {', '}
+                        </span>
+                      );
+                    })}
+                  </div>
                 </div>
                 <div>
-                  <h5>Genres:</h5>
-                  {genre.map((item) => {
-                    return (
-                      <span className="text-sm text-gray-400" key={id}>
-                        {item.name}
-                      </span>
-                    );
-                  })}
+                  <div className="text-base text-gray-200 mb-3">
+                    Duration:
+                    <br />
+                    <span className="text-base text-gray-400"> {movies.runtime}</span>
+                  </div>
                 </div>
-              </div>
-              <div class="sm:col-span-3 col-span-0  synopsis">
-                {' '}
-                <div className="synopsis">
-                  <div>Synopsis</div>
-                  <div className="text-sm text-gray-200 text-justify">{movies.overview}</div>
+                <div>
+                  <div className="text-base text-gray-200 mb-3">
+                    Genres:
+                    <br />
+                    {genre.map((item) => {
+                      return (
+                        <span className="text-base text-gray-400" key={id}>
+                          {item.name}
+                          {', '}
+                        </span>
+                      );
+                    })}
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
-
-          <div class="sidebarfitur">
-            <h5 className="mb-8">Popular</h5>
-            <div class="grid grid-cols-1 gap-4">
-              <Card />
-              <Card />
-              <Card />
+            {/* <div class="sm:col-span-3 col-span-0  synopsis"> */}{' '}
+            <div className="synopsis my-5 text-2xl text-gray-200">
+              <div className="font-semibold">Synopsis</div>
+              <div className="text-base text-gray-400 text-justify my-5">{movies.overview}</div>
             </div>
+            {/* </div> */}
           </div>
+          {/* </div> */}
         </div>
       </div>
     </>
