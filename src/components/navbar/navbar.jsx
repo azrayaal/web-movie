@@ -40,7 +40,7 @@ export default function Navbarr() {
                   </div>
                 </div>
               </div>
-              <div className="ml-auto mr-8">
+              <div className="ml-auto mr-8 sm:block hidden">
                 <div class="flex justify-center">
                   <div class=" xl:w-96">
                     <div class="input-group relative flex flex-wrap items-stretch w-full ">
