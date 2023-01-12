@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 
-const Search = (props) => {
+const Search = () => {
   const [searchValue, setSearchValue] = useState(' ');
 
   const handleSearchInputChanges = (e) => {

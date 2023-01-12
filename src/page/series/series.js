@@ -5,22 +5,22 @@ import Card from '../../components/cards/card';
 import Pagee from '../../components/pagination/pagination';
 import thumbnail1 from '../../img/thumbnail1.jpg';
 
-function Dashboard() {
+function Series() {
   const [movies, setMovies] = useState([]);
   const [page, setPage] = useState(1);
   const [numOfPages, setNumOfPages] = useState();
   const [searchValue, setSearchValue] = useState('');
 
-  const getMovieRequest = async () => {
+  const fetchSeries = async () => {
     await axios
-      .get(`https://api.themoviedb.org/3/trending/all/day?api_key=e7d0e414a1796f4d06152e01bc2c7c3b&page=${page}`)
+      .get(`https://api.themoviedb.org/3/discover/tv/?api_key=8861682de098ff4d4464beac670c09cd&page=${page}`)
       .then((response) => {
-        console.log('data =>', response.data.results);
+        // console.log('data =>', response.data.results);
         setMovies(response.data.results);
         setNumOfPages(response.data.total_pages);
       })
       .catch((error) => {
-        console.log('error', error);
+        console.log(error);
       });
   };
 
@@ -32,7 +32,7 @@ function Dashboard() {
 
   useEffect(() => {
     if (searchValue === '') {
-      getMovieRequest();
+      fetchSeries();
     } else {
       fetchSearch();
     }
@@ -41,16 +41,9 @@ function Dashboard() {
   return (
     <>
       <div className="App-body">
-        <div className="header ">
-          <h1 className="">Explore</h1>
-          <div className="text-sm text-gray-500">What are you gonna watch today?</div>
-          <div className="rounded-xl max-h-96 overflow-hidden shadow-lg my-3">
-            <img className="w-full" src={thumbnail1} alt="gambar" />
-          </div>
-        </div>
         <div className="body">
           <div className="flex mb-6">
-            <h1 className="">New Release</h1>
+            <h1 className="">New Series</h1>
             {/* search */}
             <div class=" xl:w-96  ml-auto">
               <div class="input-group relative flex flex-wrap items-stretch w-full ">
@@ -84,4 +77,4 @@ function Dashboard() {
   );
 }
 
-export default Dashboard;
+export default Series;

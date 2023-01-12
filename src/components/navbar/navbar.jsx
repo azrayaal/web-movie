@@ -1,7 +1,6 @@
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
-import Search from '../search/search';
 
 function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to);
@@ -36,8 +35,9 @@ export default function Navbarr() {
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
                     <CustomLink to="/">Home</CustomLink>
-                    <CustomLink to="/detail">Detail</CustomLink>
+                    <CustomLink to="/trending">trending</CustomLink>
                     <CustomLink to="/series">series</CustomLink>
+                    <CustomLink to="/upcoming">upcoming</CustomLink>
                   </div>
                 </div>
               </div>
