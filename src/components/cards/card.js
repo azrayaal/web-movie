@@ -5,9 +5,8 @@ export default function Card(props) {
   const { original_title, overview, poster_path, title, id } = props;
 
   const IMG = 'https://image.tmdb.org/t/p';
-
   return (
-    <Link to={`detail/${id}`}>
+    <Link to={`/detail/${id}`}>
       <div className="flex justify-center" key={id} id={id}>
         <div className="rounded-xl shadow-lg max-w-sm relative">
           <a href="#!" data-mdb-ripple="true" data-mdb-ripple-color="light">

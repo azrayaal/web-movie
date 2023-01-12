@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
 import '../../App.css';
 import Card from '../../components/cards/card';
 import Pagee from '../../components/pagination/pagination';
@@ -27,7 +28,6 @@ function Dashboard() {
   const fetchSearch = async () => {
     const { data } = await axios.get(`https://api.themoviedb.org/3/search/multi?api_key=8861682de098ff4d4464beac670c09cd&query=${searchValue}`);
     setMovies(data.results);
-    // setNumOfPages(data.data.total_pages);
   };
 
   useEffect(() => {

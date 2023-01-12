@@ -1,10 +1,13 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { Link, useParams } from 'react-router-dom';
+import Card from '../../components/cards/card';
 
 export default function Detail() {
   const { id } = useParams();
   const [movies, setMovies] = useState({});
+  const [similar, setSimilar] = useState([]);
+  const [reviews, setReviews] = useState([]);
   const [genre, setGenres] = useState([]);
   const [productCompanies, setProductCompanies] = useState([]);
 
@@ -16,6 +19,7 @@ https://api.themoviedb.org/3/movie/${id}/similar?api_key=e7d0e414a1796f4d06152e0
       )
       .then((response) => {
         console.log('similar', response.data.results);
+        setSimilar(response.data.results.slice(0, 5));
       });
   };
 
@@ -32,7 +36,8 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
 
   const getReviews = async () => {
     await axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=e7d0e414a1796f4d06152e01bc2c7c3b`).then((response) => {
-      console.log('reviews', response);
+      console.log('reviews', response.data.results);
+      setReviews(response.data.results);
     });
   };
 
@@ -56,6 +61,10 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
     getVideos(id);
     getReviews(id);
   }, []);
+
+  const refreshLink = () => {
+    window.location.reload();
+  };
 
   const IMG = 'https://image.tmdb.org/t/p';
   return (
@@ -108,7 +117,7 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
               <div className="text-base text-white mb-3">
                 Duration:
                 <br />
-                <span className="text-base text-gray-400"> {movies.runtime}</span>
+                <span className="text-base text-gray-400"> {movies.runtime} hr</span>
               </div>
             </div>
             <div>
@@ -130,14 +139,52 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
       </div>
 
       <div className="App-body">
+        {/* synposis */}
         <div className="synopsis my-5 text-2xl text-gray-200">
           <div className="font-semibold">Synopsis</div>
           <div className="text-base text-gray-400 text-justify my-5">{movies.overview}</div>
         </div>
-        <div className="synopsis my-5 text-2xl text-gray-200">
-          <div className="font-semibold">Trailer: </div>
-          <div className="text-base text-gray-400 text-justify my-5">{movies.overview}</div>
+        {/* synposis */}
+
+        {/* video */}
+
+        {/* video */}
+
+        {/* reviews */}
+        <div className="reviews mb-5 text-2xl text-gray-200">
+          <div className="font-semibold">Reviews: </div>
+          {reviews.map((item) => {
+            return (
+              <div className="py-2 px-2 bg-slate-500 rounded-md my-5">
+                <div className="text-gray-200 ">
+                  Author: <span className="font-bold">{item.author}</span>
+                </div>
+                <div className="text-sm text-slate-200 text-justify my-5">
+                  <div> {item.content}</div>
+                </div>
+                <div className="text-gray-300 text-sm">
+                  Published at: <span className="">{item.created_at}</span>
+                </div>
+              </div>
+            );
+          })}
         </div>
+        {/* reviews */}
+
+        {/* similar */}
+        <div className="text-2xl text-gray-200">
+          <div className="font-semibold mb-5">Similar: </div>
+          <div class="grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 gap-4">
+            {similar.map((item) => {
+              return (
+                <div onClick={refreshLink}>
+                  <Card original_title={item.original_title} overview={item.overview} poster_path={item.poster_path} title={item.title} key={item.id} id={item.id} />
+                </div>
+              );
+            })}
+          </div>
+        </div>
+        {/* similar */}
       </div>
       {/* end of  desing2 */}
     </>

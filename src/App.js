@@ -15,6 +15,7 @@ function App() {
         <Routes>
           <Route path="/" element={<Dashboard />} />
           <Route path="detail/:id" element={<Detail />} />
+          <Route path="detail/:id" element={<Detail />} />
           <Route path="/series" element={<Series />} />
           <Route path="/trending" element={<Trending />} />
           <Route path="/upcoming" element={<Upcoming />} />
