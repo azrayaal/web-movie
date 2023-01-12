@@ -3,12 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Card from '../../components/cards/card';
 import YouTube from 'react-youtube';
+import Modall from '../../components/modal/modal';
 
 export default function Detail() {
   const { id } = useParams();
+  const [showModal, setShowModal] = useState(false);
   const [movies, setMovies] = useState({});
   const [similar, setSimilar] = useState([]);
-  const [trailer, setTrailer] = useState(null);
+  const [trailer, setTrailer] = useState(false);
   const [playing, setPlaying] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [genre, setGenres] = useState([]);
@@ -76,6 +78,11 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
     window.location.reload();
   };
 
+  function openmodalandyt() {
+    setPlaying(true);
+    setShowModal(true);
+  }
+
   const IMG = 'https://image.tmdb.org/t/p';
   return (
     <>
@@ -83,12 +90,15 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
 
       <div className="relative">
         <img className="sm:block hidden my-5 bgimgdetail absolute w-full h-[90%] brightness-50 contrast-75" src={`${IMG}/w500${movies.backdrop_path}`} />
-        <div class="grid sm:grid-cols-4 grid-cols-1 gap-4 py-[3rem] mx-5 sm:mx-[5rem] z-20 relative">
+        <div class="grid sm:grid-cols-4 grid-cols-1 gap-4 py-[3rem] mx-5 sm:mx-[5rem] relative">
           <div class="detail-card ">
             <div className=" flex justify-center">
-              <div className="rounded-xl shadow-lg max-w-sm ">
-                <img className="rounded-xl saturate-50 h-[25rem]" src={`${IMG}/w500${movies.poster_path}`} alt={movies.title} />
+              {/*  */}
+              <div class="image-container rounded-xl shadow-lg max-w-sm relative" onClick={openmodalandyt}>
+                <img className="imgmodalkeluar rounded-xl saturate-50 h-[25rem]" src={`${IMG}/w500${movies.poster_path}`} alt="your-image-description" />
+                <div class="image-text text-2xl font-bold text-white ">CLICK TO SEE TRAILER</div>
               </div>
+              {/*  */}
             </div>
           </div>
           <div class="detail col-span-2">
@@ -156,47 +166,6 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
         </div>
         {/* synposis */}
 
-        {/* video */}
-        {playing ? (
-          <>
-            <YouTube
-              videoId={trailer.key}
-              className={'youtube amru'}
-              containerClassName={'youtube-container amru'}
-              opts={{
-                width: '100%',
-                height: '100%',
-                playerVars: {
-                  autoplay: 1,
-                  controls: 0,
-                  cc_load_policy: 0,
-                  fs: 0,
-                  iv_load_policy: 0,
-                  modestbranding: 0,
-                  rel: 0,
-                  showinfo: 0,
-                },
-              }}
-            />
-            <button onClick={() => setPlaying(false)} className={'button close-video'}>
-              Close
-            </button>
-          </>
-        ) : (
-          <div className="center-max-size">
-            <div className="poster-content">
-              {trailer ? (
-                <button className={'button play-video'} onClick={() => setPlaying(true)} type="button">
-                  Play Trailer
-                </button>
-              ) : (
-                'Sorry, no trailer available'
-              )}
-            </div>
-          </div>
-        )}
-        {/* video */}
-
         {/* reviews */}
         <div className="reviews mb-5 text-2xl text-gray-200">
           <div className="font-semibold">Reviews: </div>
@@ -234,6 +203,8 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
         {/* similar */}
       </div>
       {/* end of  desing2 */}
+
+      <Modall showModal={showModal} setShowModal={setShowModal} trailer={trailer.key} />
     </>
   );
 }
