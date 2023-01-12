@@ -2,11 +2,14 @@ import axios from 'axios';
 import React, { useEffect, useState } from 'react';
 import { Link, useParams } from 'react-router-dom';
 import Card from '../../components/cards/card';
+import YouTube from 'react-youtube';
 
 export default function Detail() {
   const { id } = useParams();
   const [movies, setMovies] = useState({});
   const [similar, setSimilar] = useState([]);
+  const [trailer, setTrailer] = useState(null);
+  const [playing, setPlaying] = useState(false);
   const [reviews, setReviews] = useState([]);
   const [genre, setGenres] = useState([]);
   const [productCompanies, setProductCompanies] = useState([]);
@@ -18,7 +21,7 @@ export default function Detail() {
 https://api.themoviedb.org/3/movie/${id}/similar?api_key=e7d0e414a1796f4d06152e01bc2c7c3b`
       )
       .then((response) => {
-        console.log('similar', response.data.results);
+        // console.log('similar', response.data.results);
         setSimilar(response.data.results.slice(0, 5));
       });
   };
@@ -30,13 +33,19 @@ https://api.themoviedb.org/3/movie/${id}/similar?api_key=e7d0e414a1796f4d06152e0
 https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01bc2c7c3b`
       )
       .then((response) => {
-        console.log('videos', response);
+        console.log('videos', response.data.results);
+
+        if (response.data && response.data.results) {
+          const trailer = response.data.results.find((vid) => vid.name === 'Official Trailer');
+          setTrailer(trailer ? trailer : response.data.results[0]);
+          console.log('trailer', trailer);
+        }
       });
   };
 
   const getReviews = async () => {
     await axios.get(`https://api.themoviedb.org/3/movie/${id}/reviews?api_key=e7d0e414a1796f4d06152e01bc2c7c3b`).then((response) => {
-      console.log('reviews', response.data.results);
+      // console.log('reviews', response.data.results);
       setReviews(response.data.results);
     });
   };
@@ -45,7 +54,7 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
     await axios
       .get(`https://api.themoviedb.org/3/movie/${id}?api_key=e7d0e414a1796f4d06152e01bc2c7c3b`)
       .then((response) => {
-        console.log('data =>', response.data);
+        // console.log('data =>', response.data);
         setMovies(response.data);
         setGenres(response.data.genres);
         setProductCompanies(response.data.production_companies);
@@ -59,6 +68,7 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
     getdetailMovies(id);
     getSimilarMovies(id);
     getVideos(id);
+    setPlaying(false);
     getReviews(id);
   }, []);
 
@@ -147,7 +157,44 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
         {/* synposis */}
 
         {/* video */}
-
+        {playing ? (
+          <>
+            <YouTube
+              videoId={trailer.key}
+              className={'youtube amru'}
+              containerClassName={'youtube-container amru'}
+              opts={{
+                width: '100%',
+                height: '100%',
+                playerVars: {
+                  autoplay: 1,
+                  controls: 0,
+                  cc_load_policy: 0,
+                  fs: 0,
+                  iv_load_policy: 0,
+                  modestbranding: 0,
+                  rel: 0,
+                  showinfo: 0,
+                },
+              }}
+            />
+            <button onClick={() => setPlaying(false)} className={'button close-video'}>
+              Close
+            </button>
+          </>
+        ) : (
+          <div className="center-max-size">
+            <div className="poster-content">
+              {trailer ? (
+                <button className={'button play-video'} onClick={() => setPlaying(true)} type="button">
+                  Play Trailer
+                </button>
+              ) : (
+                'Sorry, no trailer available'
+              )}
+            </div>
+          </div>
+        )}
         {/* video */}
 
         {/* reviews */}
