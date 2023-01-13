@@ -13,8 +13,10 @@ export default function Modall(props) {
                   <YouTube
                     videoId={trailer}
                     opts={{
+                      // height: '100%',
+                      width: '100%',
                       height: '390',
-                      width: '640',
+                      // width: '640',
                       playerVars: {
                         autoplay: 1,
                         controls: 0,
