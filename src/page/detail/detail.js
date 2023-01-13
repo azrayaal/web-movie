@@ -8,11 +8,16 @@ import Modall from '../../components/modal/modal';
 export default function Detail() {
   const { id } = useParams();
   const [showModal, setShowModal] = useState(false);
+
   const [movies, setMovies] = useState({});
-  const [similar, setSimilar] = useState([]);
   const [trailer, setTrailer] = useState(false);
   const [playing, setPlaying] = useState(false);
+
+  const [similar, setSimilar] = useState([]);
+  const [showSimilar, setShowSimilar] = useState(false);
+
   const [reviews, setReviews] = useState([]);
+  const [showReviews, setShowReviews] = useState(false);
   const [genre, setGenres] = useState([]);
   const [productCompanies, setProductCompanies] = useState([]);
 
@@ -167,39 +172,73 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
         {/* synposis */}
 
         {/* reviews */}
-        <div className="reviews mb-5 text-2xl text-gray-200">
-          <div className="font-semibold">Reviews: </div>
-          {reviews.map((item) => {
-            return (
-              <div className="py-2 px-2 bg-slate-500 rounded-md my-5">
-                <div className="text-gray-200 ">
-                  Author: <span className="font-bold">{item.author}</span>
-                </div>
-                <div className="text-sm text-slate-200 text-justify my-5">
-                  <div> {item.content}</div>
-                </div>
-                <div className="text-gray-300 text-sm">
-                  Published at: <span className="">{item.created_at}</span>
-                </div>
-              </div>
-            );
-          })}
-        </div>
-        {/* reviews */}
-
-        {/* similar */}
-        <div className="text-2xl text-gray-200">
-          <div className="font-semibold mb-5">Similar: </div>
-          <div class="grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 gap-4">
-            {similar.map((item) => {
+        {showReviews ? (
+          <div className="reviews mb-5 text-2xl text-gray-200">
+            <a className="font-semibold" onClick={() => setShowReviews(false)}>
+              Reviews:{' '}
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWtJREFUSEu9ldFRg0AQhv/tArjMqCM8GyuwhViB6cCkErECtQKxA0sgz94DmQnQhevAcMwBB3eQibxy+397e7v/Ei780YX1YQWcSrkl4AFEazCv64SIUjCnIE6EF31NJTkKKAq5YcILgGvLLTNi7IMgTEznjIBTIWMiPM8pHxPHKy/a92MGgCXiSpQZr6sg3OmQDqApy+eczAcZMx71cnUAeSkzAFdjAAI+foFvAt4mksiEH96o/y2g6ZbRwEo88MNtFWg9q92iBRSlfGfgaaQTWnH1fwqiJ9MC8uInBdGdoQsG4lYIUSq82/t6ZNThvJQ8R9wGEX5Ya08C+kAVZEpm7Ky1RHqgM4D5IIKothWnR1YQV4DxkV2GzBlgatMqS9ugOQKOwg9bg/xfq6indIGTOptd29sLICYn7XRRv4+bR4+nzK+JORJjN2vh6LAKBMKGq3WprIT5QPXaRDImPHDTc3bAVKx16Z8L/gPT67UZbsj/kQAAAABJRU5ErkJggg==" />
+            </a>
+            {reviews.map((item) => {
               return (
-                <div onClick={refreshLink}>
-                  <Card original_title={item.original_title} overview={item.overview} poster_path={item.poster_path} title={item.title} key={item.id} id={item.id} />
-                </div>
+                <>
+                  <div className="py-2 px-2 bg-slate-500 rounded-md my-5">
+                    <div className="text-gray-200 ">
+                      Author: <span className="font-bold">{item.author}</span>
+                    </div>
+                    <div className="text-sm text-slate-200 text-justify my-5">
+                      <div> {item.content}</div>
+                    </div>
+                    <div className="text-gray-300 text-sm">
+                      Published at: <span className="">{item.created_at}</span>
+                    </div>
+                  </div>
+                </>
               );
             })}
           </div>
-        </div>
+        ) : (
+          <a className="reviews mb-5 text-2xl text-gray-200" onClick={() => setShowReviews(true)}>
+            <div className="font-semibold inline-block">
+              Reviews:
+              <img
+                className=""
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWpJREFUSEu9ld9Rg0AQxr/tArjMqOPxbKzAFmIFxgpMKhErMFYglmAH5Nl7IDMByliHG0AIdwfkj7xyt7/dvW+/JVz4owvHxyBgX6glAQ8gmoN5rhMiSsCcgDgWXvjlStIKyHO1YMIrgOuBKlNirINAxqZzRsA+VxERXqa0j4mjmReuD+/0AMcEr4My420WyFUb0gFUbfmcknkvY8Zju10dQFaoFMCVDSB8qc9nhWJHEqnw5U39vwFUanl3ZT8SAGpV0QDyQm0YeDoLAPgIfLnUiq4DZvlPAqK7cwDKORHe7X0X4O6r5o5tUfvsXwVmwEb48tlVle3t6mTGtMgKsQqDeSuCUNvK2EfuQVyqI9MjjxiyBjIkaaNMqwFyDhqAUsrfBLjmZSd82Rjk/1pFWcVFza6W4zEQk5N2VHSo9erRI5f5VXd2xFhNWjhtWAkCYcHluqythHlLem0itgXuuekpO8B1d3Dpnwr+BSyltRkO7UW/AAAAAElFTkSuQmCC"
+              />
+            </div>
+          </a>
+        )}
+        {/* reviews */}
+
+        {/* similar */}
+        {showSimilar ? (
+          <div className="text-2xl text-gray-200">
+            <a className="font-semibold " onClick={() => setShowSimilar(false)}>
+              Similar:{' '}
+              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWtJREFUSEu9ldFRg0AQhv/tArjMqCM8GyuwhViB6cCkErECtQKxA0sgz94DmQnQhevAcMwBB3eQibxy+397e7v/Ei780YX1YQWcSrkl4AFEazCv64SIUjCnIE6EF31NJTkKKAq5YcILgGvLLTNi7IMgTEznjIBTIWMiPM8pHxPHKy/a92MGgCXiSpQZr6sg3OmQDqApy+eczAcZMx71cnUAeSkzAFdjAAI+foFvAt4mksiEH96o/y2g6ZbRwEo88MNtFWg9q92iBRSlfGfgaaQTWnH1fwqiJ9MC8uInBdGdoQsG4lYIUSq82/t6ZNThvJQ8R9wGEX5Ya08C+kAVZEpm7Ky1RHqgM4D5IIKothWnR1YQV4DxkV2GzBlgatMqS9ugOQKOwg9bg/xfq6indIGTOptd29sLICYn7XRRv4+bR4+nzK+JORJjN2vh6LAKBMKGq3WprIT5QPXaRDImPHDTc3bAVKx16Z8L/gPT67UZbsj/kQAAAABJRU5ErkJggg==" />
+            </a>
+
+            <div class="grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 gap-4 my-5">
+              {similar.map((item) => {
+                return (
+                  <div onClick={refreshLink}>
+                    <Card original_title={item.original_title} overview={item.overview} poster_path={item.poster_path} title={item.title} key={item.id} id={item.id} />
+                  </div>
+                );
+              })}
+            </div>
+            <button onClick={() => setShowSimilar(false)}>Close Similar</button>
+          </div>
+        ) : (
+          <a className="reviews mb-5 text-2xl text-gray-200" onClick={() => setShowSimilar(true)}>
+            <div className="font-semibold inline-block">
+              Reviews:
+              <img
+                className=""
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWpJREFUSEu9ld9Rg0AQxr/tArjMqOPxbKzAFmIFxgpMKhErMFYglmAH5Nl7IDMByliHG0AIdwfkj7xyt7/dvW+/JVz4owvHxyBgX6glAQ8gmoN5rhMiSsCcgDgWXvjlStIKyHO1YMIrgOuBKlNirINAxqZzRsA+VxERXqa0j4mjmReuD+/0AMcEr4My420WyFUb0gFUbfmcknkvY8Zju10dQFaoFMCVDSB8qc9nhWJHEqnw5U39vwFUanl3ZT8SAGpV0QDyQm0YeDoLAPgIfLnUiq4DZvlPAqK7cwDKORHe7X0X4O6r5o5tUfvsXwVmwEb48tlVle3t6mTGtMgKsQqDeSuCUNvK2EfuQVyqI9MjjxiyBjIkaaNMqwFyDhqAUsrfBLjmZSd82Rjk/1pFWcVFza6W4zEQk5N2VHSo9erRI5f5VXd2xFhNWjhtWAkCYcHluqythHlLem0itgXuuekpO8B1d3Dpnwr+BSyltRkO7UW/AAAAAElFTkSuQmCC"
+              />
+            </div>
+          </a>
+        )}
         {/* similar */}
       </div>
       {/* end of  desing2 */}
