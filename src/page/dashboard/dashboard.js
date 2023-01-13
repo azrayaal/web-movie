@@ -40,19 +40,36 @@ function Dashboard() {
 
   return (
     <>
-      <div className="App-body">
-        <div className="header ">
-          <h1 className="">Explore</h1>
-          <div className="text-sm text-gray-500">What are you gonna watch today?</div>
-          <div className="rounded-xl max-h-96 overflow-hidden shadow-lg my-3">
-            <img className="w-full" src={thumbnail1} alt="gambar" />
+      <div className="header sm:block hidden ">
+        <div className=" max-h-64 overflow-hidden shadow-lg my-3 relative">
+          <img className="w-full z-10 brightness-50 contrast-75" src={thumbnail1} alt="gambar" />
+          {/* search */}
+          <div class=" w-full absolute top-[30%]  z-20">
+            <div className="mb-5 mx-8">
+              <h1 className="font-bold text-white text-2xl">Explore</h1>
+              <div className="text-sm text-white">What are you gonna watch today?</div>
+            </div>
+            <div class="input-group relative flex flex-wrap items-stretch mx-8">
+              <input
+                value={searchValue}
+                onChange={(event) => setSearchValue(event.target.value)}
+                type="text"
+                class="form-control relative flex-auto min-w-0 block w-full px-3 py-1.5 text-base font-normal text-gray-200 bg-gray-500 bg-clip-padding border border-solid border-gray-500 rounded transition ease-in-out m-0 focus:text-gray-700 focus:bg-white focus:border-blue-600 focus:outline-none"
+                placeholder="Search"
+                aria-label="Search"
+                aria-describedby="button-addon2"
+              />
+            </div>
           </div>
+          {/* search */}
         </div>
+      </div>
+      <div className="App-body">
         <div className="body">
           <div className="flex mb-6">
             <h1 className="">New Release</h1>
             {/* search */}
-            <div class=" xl:w-96  ml-auto">
+            <div class=" xl:w-96  ml-auto sm:hidden block">
               <div class="input-group relative flex flex-wrap items-stretch w-full ">
                 <input
                   value={searchValue}

@@ -70,3 +70,18 @@
 .image-container:hover .image-text {
   visibility: visible;
 }
+
+footer {
+  color: #fff;
+  padding: 20px;
+}
+
+.container-footer {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.social-links a {
+  color: #fff;
+  margin-right: 10px;
+}

@@ -6,6 +6,7 @@ import Navbarr from './components/navbar/navbar';
 import Series from './page/series/series';
 import Trending from './page/trending/trending';
 import Upcoming from './page/upcoming/upcoming';
+import FooterA from './components/footer/footer';
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
           <Route path="/upcoming" element={<Upcoming />} />
           {/* <Route path="*" element={<Pagenotfound />} /> */}
         </Routes>
+        <FooterA />
       </Router>
     </>
   );

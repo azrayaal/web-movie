@@ -1,6 +1,7 @@
 import { Disclosure } from '@headlessui/react';
 import { Bars3Icon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link, useMatch, useResolvedPath } from 'react-router-dom';
+import logo from '../../img/movie-icon-11.png';
 
 function CustomLink({ to, children, ...props }) {
   const resolvedPath = useResolvedPath(to);
@@ -29,8 +30,8 @@ export default function Navbarr() {
               </div>
               <div className="flex flex-1 items-center justify-center sm:items-stretch sm:justify-start">
                 <div className="flex flex-shrink-0 items-center">
-                  <img className="block h-8 w-auto lg:hidden" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
-                  <img className="hidden h-8 w-auto lg:block" src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=500" alt="Your Company" />
+                  <img className="block h-8 w-auto lg:hidden" src={logo} alt="Your Company" />
+                  <img className="hidden h-8 w-auto lg:block" src={logo} alt="Your Company" />
                 </div>
                 <div className="hidden sm:ml-6 sm:block">
                   <div className="flex space-x-4">
@@ -52,8 +53,10 @@ export default function Navbarr() {
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-2 pb-3">
               <div className="flex space-x-4">
-                <CustomLink to="/detail">Detail</CustomLink>
                 <CustomLink to="/">Home</CustomLink>
+                <CustomLink to="/trending">trending</CustomLink>
+                <CustomLink to="/series">series</CustomLink>
+                <CustomLink to="/upcoming">upcoming</CustomLink>
               </div>
             </div>
           </Disclosure.Panel>

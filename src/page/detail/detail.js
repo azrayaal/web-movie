@@ -95,7 +95,7 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
 
       <div className="relative">
         <img className="sm:block hidden my-5 bgimgdetail absolute w-full h-[90%] brightness-50 contrast-75" src={`${IMG}/w500${movies.backdrop_path}`} />
-        <div class="grid sm:grid-cols-4 grid-cols-1 gap-4 py-[3rem] mx-5 sm:mx-[5rem] relative">
+        <div class="grid sm:grid-cols-3 grid-cols-1 gap-4 py-[3rem] mx-5 sm:mx-[5rem] relative">
           <div class="detail-card ">
             <div className=" flex justify-center">
               {/*  */}
@@ -165,7 +165,7 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
 
       <div className="App-body">
         {/* synposis */}
-        <div className="synopsis my-5 text-2xl text-gray-200">
+        <div className="synopsis mb-5 text-2xl text-gray-200">
           <div className="font-semibold">Synopsis</div>
           <div className="text-base text-gray-400 text-justify my-5">{movies.overview}</div>
         </div>
