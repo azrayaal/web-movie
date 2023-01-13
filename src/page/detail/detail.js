@@ -175,8 +175,11 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
         {showReviews ? (
           <div className="reviews mb-5 text-2xl text-gray-200">
             <a className="font-semibold" onClick={() => setShowReviews(false)}>
-              Reviews:{' '}
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWtJREFUSEu9ldFRg0AQhv/tArjMqCM8GyuwhViB6cCkErECtQKxA0sgz94DmQnQhevAcMwBB3eQibxy+397e7v/Ei780YX1YQWcSrkl4AFEazCv64SIUjCnIE6EF31NJTkKKAq5YcILgGvLLTNi7IMgTEznjIBTIWMiPM8pHxPHKy/a92MGgCXiSpQZr6sg3OmQDqApy+eczAcZMx71cnUAeSkzAFdjAAI+foFvAt4mksiEH96o/y2g6ZbRwEo88MNtFWg9q92iBRSlfGfgaaQTWnH1fwqiJ9MC8uInBdGdoQsG4lYIUSq82/t6ZNThvJQ8R9wGEX5Ya08C+kAVZEpm7Ky1RHqgM4D5IIKothWnR1YQV4DxkV2GzBlgatMqS9ugOQKOwg9bg/xfq6indIGTOptd29sLICYn7XRRv4+bR4+nzK+JORJjN2vh6LAKBMKGq3WprIT5QPXaRDImPHDTc3bAVKx16Z8L/gPT67UZbsj/kQAAAABJRU5ErkJggg==" />
+              <p className="inline-block">Reviews:</p>
+              <img
+                className="inline-block ml-3"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWtJREFUSEu9ldFRg0AQhv/tArjMqCM8GyuwhViB6cCkErECtQKxA0sgz94DmQnQhevAcMwBB3eQibxy+397e7v/Ei780YX1YQWcSrkl4AFEazCv64SIUjCnIE6EF31NJTkKKAq5YcILgGvLLTNi7IMgTEznjIBTIWMiPM8pHxPHKy/a92MGgCXiSpQZr6sg3OmQDqApy+eczAcZMx71cnUAeSkzAFdjAAI+foFvAt4mksiEH96o/y2g6ZbRwEo88MNtFWg9q92iBRSlfGfgaaQTWnH1fwqiJ9MC8uInBdGdoQsG4lYIUSq82/t6ZNThvJQ8R9wGEX5Ya08C+kAVZEpm7Ky1RHqgM4D5IIKothWnR1YQV4DxkV2GzBlgatMqS9ugOQKOwg9bg/xfq6indIGTOptd29sLICYn7XRRv4+bR4+nzK+JORJjN2vh6LAKBMKGq3WprIT5QPXaRDImPHDTc3bAVKx16Z8L/gPT67UZbsj/kQAAAABJRU5ErkJggg=="
+              />
             </a>
             {reviews.map((item) => {
               return (
@@ -198,10 +201,10 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
           </div>
         ) : (
           <a className="reviews mb-5 text-2xl text-gray-200" onClick={() => setShowReviews(true)}>
-            <div className="font-semibold inline-block">
-              Reviews:
+            <div className="font-semibold ">
+              <p className="inline-block">Reviews:</p>
               <img
-                className=""
+                className="ml-3 inline-block"
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWpJREFUSEu9ld9Rg0AQxr/tArjMqOPxbKzAFmIFxgpMKhErMFYglmAH5Nl7IDMByliHG0AIdwfkj7xyt7/dvW+/JVz4owvHxyBgX6glAQ8gmoN5rhMiSsCcgDgWXvjlStIKyHO1YMIrgOuBKlNirINAxqZzRsA+VxERXqa0j4mjmReuD+/0AMcEr4My420WyFUb0gFUbfmcknkvY8Zju10dQFaoFMCVDSB8qc9nhWJHEqnw5U39vwFUanl3ZT8SAGpV0QDyQm0YeDoLAPgIfLnUiq4DZvlPAqK7cwDKORHe7X0X4O6r5o5tUfvsXwVmwEb48tlVle3t6mTGtMgKsQqDeSuCUNvK2EfuQVyqI9MjjxiyBjIkaaNMqwFyDhqAUsrfBLjmZSd82Rjk/1pFWcVFza6W4zEQk5N2VHSo9erRI5f5VXd2xFhNWjhtWAkCYcHluqythHlLem0itgXuuekpO8B1d3Dpnwr+BSyltRkO7UW/AAAAAElFTkSuQmCC"
               />
             </div>
@@ -213,8 +216,12 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
         {showSimilar ? (
           <div className="text-2xl text-gray-200">
             <a className="font-semibold " onClick={() => setShowSimilar(false)}>
-              Similar:{' '}
-              <img src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWtJREFUSEu9ldFRg0AQhv/tArjMqCM8GyuwhViB6cCkErECtQKxA0sgz94DmQnQhevAcMwBB3eQibxy+397e7v/Ei780YX1YQWcSrkl4AFEazCv64SIUjCnIE6EF31NJTkKKAq5YcILgGvLLTNi7IMgTEznjIBTIWMiPM8pHxPHKy/a92MGgCXiSpQZr6sg3OmQDqApy+eczAcZMx71cnUAeSkzAFdjAAI+foFvAt4mksiEH96o/y2g6ZbRwEo88MNtFWg9q92iBRSlfGfgaaQTWnH1fwqiJ9MC8uInBdGdoQsG4lYIUSq82/t6ZNThvJQ8R9wGEX5Ya08C+kAVZEpm7Ky1RHqgM4D5IIKothWnR1YQV4DxkV2GzBlgatMqS9ugOQKOwg9bg/xfq6indIGTOptd29sLICYn7XRRv4+bR4+nzK+JORJjN2vh6LAKBMKGq3WprIT5QPXaRDImPHDTc3bAVKx16Z8L/gPT67UZbsj/kQAAAABJRU5ErkJggg==" />
+              <p className="inline-block">Similar:</p>
+
+              <img
+                className="inline-block ml-3"
+                src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWtJREFUSEu9ldFRg0AQhv/tArjMqCM8GyuwhViB6cCkErECtQKxA0sgz94DmQnQhevAcMwBB3eQibxy+397e7v/Ei780YX1YQWcSrkl4AFEazCv64SIUjCnIE6EF31NJTkKKAq5YcILgGvLLTNi7IMgTEznjIBTIWMiPM8pHxPHKy/a92MGgCXiSpQZr6sg3OmQDqApy+eczAcZMx71cnUAeSkzAFdjAAI+foFvAt4mksiEH96o/y2g6ZbRwEo88MNtFWg9q92iBRSlfGfgaaQTWnH1fwqiJ9MC8uInBdGdoQsG4lYIUSq82/t6ZNThvJQ8R9wGEX5Ya08C+kAVZEpm7Ky1RHqgM4D5IIKothWnR1YQV4DxkV2GzBlgatMqS9ugOQKOwg9bg/xfq6indIGTOptd29sLICYn7XRRv4+bR4+nzK+JORJjN2vh6LAKBMKGq3WprIT5QPXaRDImPHDTc3bAVKx16Z8L/gPT67UZbsj/kQAAAABJRU5ErkJggg=="
+              />
             </a>
 
             <div class="grid grid-cols-2 lg:grid-cols-5 md:grid-cols-3 gap-4 my-5">
@@ -226,14 +233,13 @@ https://api.themoviedb.org/3/movie/${id}/videos?api_key=e7d0e414a1796f4d06152e01
                 );
               })}
             </div>
-            <button onClick={() => setShowSimilar(false)}>Close Similar</button>
           </div>
         ) : (
           <a className="reviews mb-5 text-2xl text-gray-200" onClick={() => setShowSimilar(true)}>
-            <div className="font-semibold inline-block">
-              Reviews:
+            <div className="font-semibold">
+              <p className="inline-block">Similar:</p>
               <img
-                className=""
+                className="inline-block ml-3"
                 src="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAABgAAAAYCAYAAADgdz34AAAAAXNSR0IArs4c6QAAAWpJREFUSEu9ld9Rg0AQxr/tArjMqOPxbKzAFmIFxgpMKhErMFYglmAH5Nl7IDMByliHG0AIdwfkj7xyt7/dvW+/JVz4owvHxyBgX6glAQ8gmoN5rhMiSsCcgDgWXvjlStIKyHO1YMIrgOuBKlNirINAxqZzRsA+VxERXqa0j4mjmReuD+/0AMcEr4My420WyFUb0gFUbfmcknkvY8Zju10dQFaoFMCVDSB8qc9nhWJHEqnw5U39vwFUanl3ZT8SAGpV0QDyQm0YeDoLAPgIfLnUiq4DZvlPAqK7cwDKORHe7X0X4O6r5o5tUfvsXwVmwEb48tlVle3t6mTGtMgKsQqDeSuCUNvK2EfuQVyqI9MjjxiyBjIkaaNMqwFyDhqAUsrfBLjmZSd82Rjk/1pFWcVFza6W4zEQk5N2VHSo9erRI5f5VXd2xFhNWjhtWAkCYcHluqythHlLem0itgXuuekpO8B1d3Dpnwr+BSyltRkO7UW/AAAAAElFTkSuQmCC"
               />
             </div>
